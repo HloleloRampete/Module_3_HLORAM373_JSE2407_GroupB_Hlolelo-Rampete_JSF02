@@ -1,21 +1,16 @@
 <!-- src/components/Layout.svelte -->
 <script>
-    // Layout logic
+    import Header from './Header.svelte';
   </script>
   
   <style>
-    /* Layout styles */
+    /* Add your layout styles here */
   </style>
   
-  <header>
-    <!-- Header content -->
-  </header>
-  
-  <main>
-    <slot></slot>
-  </main>
-  
-  <footer>
-    <!-- Footer content -->
-  </footer>
+  <div>
+    <Header />
+    <main>
+      <slot></slot>
+    </main>
+  </div>
   
