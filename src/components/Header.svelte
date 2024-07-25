@@ -1,6 +1,5 @@
 <script>
-    import { onMount } from "svelte";
-  
+    
     let isNavbarOpen = false;
   
     const toggleNavbar = () => {
