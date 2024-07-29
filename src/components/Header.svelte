@@ -8,9 +8,6 @@
   };
 </script>
 
-<style>
-  /* Add your header styles here */
-</style>
 
 <header class="sticky z-50 top-0">
   <nav class="bg-gray-500 border-gray-200">
