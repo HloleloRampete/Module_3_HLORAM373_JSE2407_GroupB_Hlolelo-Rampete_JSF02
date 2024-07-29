@@ -12,7 +12,7 @@
 </script>
 
 <style>
-  /* Product detail styles */
+  
 </style>
 
 <h1>Product Detail for {productId}</h1>
