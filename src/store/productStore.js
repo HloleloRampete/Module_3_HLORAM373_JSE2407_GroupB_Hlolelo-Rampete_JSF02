@@ -1,29 +1,55 @@
 import { writable } from 'svelte/store';
+import { getCategories, fetchSingleProduct } from '../api/api';
 
-// Initial products data (you might fetch this from an API in a real application)
-const initialProducts = [
-  { id: 1, name: 'Product A', price: 30 },
-  { id: 2, name: 'Product B', price: 20 },
-  { id: 3, name: 'Product C', price: 50 },
-];
+// Stores for filtering and searching
+export const filterItem = writable('All categories');
+export const searchTerm = writable('');
+export const products = writable([]);
+export const categories = writable([]);
+export const error = writable(null);
 
-// Writable store for the sorting criteria
-export const sorting = writable('default');
+// Function to fetch categories
+export async function fetchCategories() {
+  const { response, error: fetchError } = await getCategories();
+  if (fetchError) {
+    error.set(fetchError);
+  } else {
+    categories.set(response);
+  }
+}
 
-// Writable store for the products
-export const products = writable(initialProducts);
+// Function to fetch all products
+export async function fetchProducts() {
+  try {
+    const response = await fetch('https://fakestoreapi.com/products');
+    if (!response.ok) {
+      throw new Error('Data fetching failed, please check your network connection');
+    }
+    const data = await response.json();
+    if ($filterItem !== 'All categories') {
+      products.set(data.filter(product => product.category === $filterItem));
+    } else {
+      products.set(data);
+    }
+  } catch (fetchError) {
+    error.set(fetchError);
+  }
+}
 
-// Function to sort products based on the current sorting criteria
-export function sortProducts() {
-  sorting.subscribe((sortOrder) => {
-    products.update((items) => {
-      let sortedItems = [...items];
-      if (sortOrder === 'low') {
-        sortedItems.sort((a, b) => a.price - b.price);
-      } else if (sortOrder === 'high') {
-        sortedItems.sort((a, b) => b.price - a.price);
-      }
-      return sortedItems;
-    });
-  });
+// Function to search products based on the search term
+export async function searchProducts(term) {
+  try {
+    const response = await fetch('https://fakestoreapi.com/products');
+    if (!response.ok) {
+      throw new Error('Data fetching failed, please check your network connection');
+    }
+    const data = await response.json();
+    if (term) {
+      products.set(data.filter(product => product.title.toLowerCase().includes(term.toLowerCase())));
+    } else {
+      products.set(data);
+    }
+  } catch (fetchError) {
+    error.set(fetchError);
+  }
 }
