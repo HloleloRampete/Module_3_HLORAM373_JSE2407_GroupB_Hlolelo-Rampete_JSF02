@@ -120,7 +120,7 @@
       <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/">
           <button class="flex items-center space-x-3 rtl:space-x-reverse">
-            <img src="/online-shop.png" class="h-8" alt="Flowbite Logo" />
+            <img src="./assets/online-shop.png" class="h-8" alt="SwiftCart Logo" />
             <span class="self-center text-2xl font-semibold whitespace-nowrap text-white">SwiftCart</span>
           </button>
         </a>
@@ -154,7 +154,7 @@
 
   <!-- Main Content -->
   <div class="container mx-auto p-6">
-    <div class="flex justify-between mb-4">
+    <div class="flex justify-center mb-4">
       <div class="flex space-x-4">
         <select bind:value={selectedCategory} on:change={searchProducts} class="border p-2 rounded">
           <option value="">All Categories</option>
@@ -169,7 +169,7 @@
         </div>
 
         <select bind:value={sortOrder} on:change={searchProducts} class="border p-2 rounded">
-          <option value="">Sort by Price</option>
+          <option value="">Default</option>
           <option value="asc">Lowest to Highest</option>
           <option value="desc">Highest to Lowest</option>
         </select>

@@ -2,6 +2,7 @@
   import { Router, Route } from 'svelte-routing';
   import Home from './pages/Home.svelte';
   import ProductDetails from './pages/ProductDetailView.svelte';
+  import './app.css'
 </script>
 
 <Router>
