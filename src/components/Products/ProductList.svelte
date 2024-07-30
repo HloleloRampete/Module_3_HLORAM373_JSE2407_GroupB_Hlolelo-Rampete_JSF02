@@ -10,15 +10,23 @@
   let error = null;
 
   onMount(() => {
-    const unsubscribe = productStore.subscribe((state) => {
-      products = state.products;
-      loading = state.loading;
-      error = state.error;
+    const unsubscribe = productStore.products.subscribe((state) => {
+      products = state;
+      loading = false;
+    });
+
+    productStore.error.subscribe((value) => {
+      error = value;
     });
 
     return () => {
       unsubscribe();
     };
+  });
+
+  // You might want to trigger the initial product fetch here
+  onMount(() => {
+    productStore.fetchProducts();
   });
 </script>
 
