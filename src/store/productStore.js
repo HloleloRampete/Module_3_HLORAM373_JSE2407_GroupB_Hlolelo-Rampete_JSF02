@@ -53,3 +53,35 @@ export async function searchProducts(term) {
     error.set(fetchError);
   }
 }
+
+export function sortProducts(products, criteria) {
+    // Sorting logic based on criteria
+    const sortedProducts = [...products]; // Create a copy of the products array
+  
+    switch (criteria) {
+      case 'price-asc':
+        sortedProducts.sort((a, b) => a.price - b.price);
+        break;
+      case 'price-desc':
+        sortedProducts.sort((a, b) => b.price - a.price);
+        break;
+      case 'rating-asc':
+        sortedProducts.sort((a, b) => a.rating.rate - b.rating.rate);
+        break;
+      case 'rating-desc':
+        sortedProducts.sort((a, b) => b.rating.rate - a.rating.rate);
+        break;
+      case 'name-asc':
+        sortedProducts.sort((a, b) => a.title.localeCompare(b.title));
+        break;
+      case 'name-desc':
+        sortedProducts.sort((a, b) => b.title.localeCompare(a.title));
+        break;
+      default:
+        // If no valid criteria is provided, return the products unsorted
+        return products;
+    }
+  
+    return sortedProducts;
+  }
+  

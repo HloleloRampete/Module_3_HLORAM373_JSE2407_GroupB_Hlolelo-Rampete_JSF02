@@ -1,27 +1,28 @@
 <script>
-    import { sorting, sortProducts } from '../store/productStore';
+    import { sortProducts } from '../store/productStore.js';
   
-    function handleSort(event) {
-      sorting.set(event.target.value);
-      sortProducts();
+    export let products = [];
+    export let sortedProducts = [];
+    let criteria = 'price-asc'; // Default sorting criteria
+  
+    // Function to handle sort criteria change
+    function handleSortChange(event) {
+      criteria = event.target.value;
+      sortedProducts = sortProducts(products, criteria);
     }
+  
+    // Initialize sorted products when the component mounts or products change
+    $: sortedProducts = sortProducts(products, criteria);
   </script>
   
-  <div class="flex sm:w-[95%] max-w-[21rem] md:w-full">
-    <label for="sort" class="w-20 my-auto font-semibold">
-      Sort by: 
-    </label>
-    <select
-      on:change={handleSort}
-      bind:value={$sorting}
-      id="sort"
-      class="p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-e-lg border-s-gray-50 border-s-2 border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
-    >
-      <option value="default">Default</option>
-      <option value="low">Price: Low to High</option>
-      <option value="high">Price: High to Low</option>
+  <div>
+    <!-- Dropdown to select sorting criteria -->
+    <select on:change={handleSortChange} bind:value={criteria} class="p-2 border rounded">
+      <option value="price-asc">Price: Low to High</option>
+      <option value="price-desc">Price: High to Low</option>
+      <option value="rating-asc">Rating: Low to High</option>
+      <option value="rating-desc">Rating: High to Low</option>
+      <option value="name-asc">Name: A to Z</option>
+      <option value="name-desc">Name: Z to A</option>
     </select>
   </div>
-  
-  
-  
