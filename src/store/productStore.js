@@ -31,6 +31,7 @@ export async function fetchProducts() {
     } else {
       products.set(data);
     }
+    sortProducts($sortCriteria); // Apply sorting after setting products
   } catch (fetchError) {
     error.set(fetchError);
   }
@@ -54,10 +55,10 @@ export async function searchProducts(term) {
   }
 }
 
-export function sortProducts(products, criteria) {
-    // Sorting logic based on criteria
-    const sortedProducts = [...products]; // Create a copy of the products array
-  
+export function sortProducts(criteria) {
+  sortCriteria.set(criteria);
+  products.update(currentProducts => {
+    const sortedProducts = [...currentProducts];
     switch (criteria) {
       case 'price-asc':
         sortedProducts.sort((a, b) => a.price - b.price);
@@ -77,11 +78,8 @@ export function sortProducts(products, criteria) {
       case 'name-desc':
         sortedProducts.sort((a, b) => b.title.localeCompare(a.title));
         break;
-      default:
-        // If no valid criteria is provided, return the products unsorted
-        return products;
     }
-  
     return sortedProducts;
-  }
+  });
+}
   
