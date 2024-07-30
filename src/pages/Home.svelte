@@ -169,7 +169,7 @@
         </div>
 
         <select bind:value={sortOrder} on:change={searchProducts} class="border p-2 rounded">
-          <option value="">Default</option>
+          <option value="">Sort by Price</option>
           <option value="asc">Lowest to Highest</option>
           <option value="desc">Highest to Lowest</option>
         </select>
@@ -197,16 +197,23 @@
               <p class="text-lg font-semibold text-green-600 mb-4">${product.price}</p>
             </div>
             <div class="flex items-center">
-              {#each Array(Math.round(product.rating.rate)) as _}
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-4 w-4 text-yellow-500" viewBox="0 0 20 20">
-                  <path d="M10 15.273l-5.228 2.747 1.002-5.79-4.2-4.1 5.872-.852L10 1.273l2.554 5.217 5.872.852-4.2 4.1 1.002 5.79L10 15.273z" />
-                </svg>
+              {#each Array(5) as _, i}
+                {#if i < Math.round(product.rating.rate)}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-4 w-4 text-yellow-500" viewBox="0 0 20 20">
+                    <path d="M10 15.273l-5.228 2.747 1.002-5.79-4.2-4.1 5.872-.852L10 1.273l2.554 5.217 5.872.852-4.2 4.1 1.002 5.79L10 15.273z" />
+                  </svg>
+                {:else}
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-4 w-4 text-gray-400" viewBox="0 0 20 20">
+                    <path d="M10 15.273l-5.228 2.747 1.002-5.79-4.2-4.1 5.872-.852L10 1.273l2.554 5.217 5.872.852-4.2 4.1 1.002 5.79L10 15.273z" />
+                  </svg>
+                {/if}
               {/each}
-              <span class="ml-2 text-sm">({product.rating.count})</span>
+              <span class="ml-2 text-sm">({product.rating.count} reviews)</span>
             </div>
           </button>
         {/each}
       </div>
+      
     {/if}
   </div>
 </body>
