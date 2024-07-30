@@ -83,3 +83,14 @@ export function sortProducts(criteria) {
   });
 }
   
+export const productStore = {
+  filterItem,
+  searchTerm,
+  products,
+  categories,
+  error,
+  fetchCategories,
+  fetchProducts,
+  searchProducts,
+  sortProducts
+};
