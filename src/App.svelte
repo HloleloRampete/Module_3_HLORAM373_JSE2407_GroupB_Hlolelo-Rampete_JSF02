@@ -1,7 +1,10 @@
 <script>
-  import Router from 'svelte-spa-router';
-  import { routes } from './routes';
-  import './app.css';
+  import { Router, Route } from 'svelte-routing';
+  import Home from './pages/Home.svelte';
+  import ProductDetails from './pages/ProductDetailView.svelte';
 </script>
 
-<Router {routes} />
+<Router>
+  <Route path="/" component={Home} />
+  <Route path="product/:id" component={ProductDetails} />
+</Router>
