@@ -1,12 +1,12 @@
 import { writable } from 'svelte/store';
 import { getCategories, fetchSingleProduct } from '../api/api';
 
-// Stores for filtering and searching
 export const filterItem = writable('All categories');
 export const searchTerm = writable('');
 export const products = writable([]);
 export const categories = writable([]);
 export const error = writable(null);
+export const sortCriteria = writable('price-asc');
 
 // Function to fetch categories
 export async function fetchCategories() {
